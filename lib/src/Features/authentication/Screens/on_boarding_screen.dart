@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trading_app/src/Constants/Color.dart';
+import 'package:trading_app/src/Features/authentication/Screens/login.dart';
 import 'Registration/registration.dart';
 import 'Wigets/Mslider.dart';
 
@@ -14,14 +15,18 @@ class OnboardingScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 55.0),
+
+              //logo of company
+              const Padding(
+                padding: EdgeInsets.only(top: 55.0),
                 child: Image(
                   image: AssetImage("Assets/Images/Logo/logo.png"),
                   width: 110.0,
                 ),
               ),
-              MSlider(
+
+              //Slider
+              const MSlider(
                 mainPath: "Assets/Images/onboardimages/",
                 picsPath: ["pic1.png", "pic2.png", "pic3.png"],
                 cont: [
@@ -30,21 +35,16 @@ class OnboardingScreen extends StatelessWidget {
                   "Get your Debit card or Go virtual with our MasterCard"
                 ],
               ),
+
+              //Buttons
               Column(
                 children: [
+                  const SizedBox(height: 10.0,),
+
+                  //create account button
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.7,
                     child: FilledButton(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: Text(
-                          "CREATE AN ACCOUNT",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline3!
-                              .copyWith(color: TWhite),
-                        ),
-                      ),
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -58,9 +58,22 @@ class OnboardingScreen extends StatelessWidget {
                         backgroundColor:
                         MaterialStateProperty.all<Color>(TGreen),
                       ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Text(
+                          "CREATE AN ACCOUNT",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline3!
+                              .copyWith(color: TWhite),
+                        ),
+                      ),
                     ),
                   ),
-                  SizedBox(height: 0.0),
+                  const SizedBox(height: 0.0),
+
+
+                  //text
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5),
                     child: Text(
@@ -68,9 +81,25 @@ class OnboardingScreen extends StatelessWidget {
                       style: Theme.of(context).textTheme.headline4,
                     ),
                   ),
+
+
+                  //Login Button
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.7,
                     child: FilledButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginPage(),
+                          ),
+                        );
+                      },
+                      style: ButtonStyle(
+                        elevation: MaterialStateProperty.all<double>(2.0),
+                        backgroundColor:
+                        MaterialStateProperty.all<Color>(TBgWhite),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: Text(
@@ -80,12 +109,6 @@ class OnboardingScreen extends StatelessWidget {
                               .headline3!
                               .copyWith(color: TGreen),
                         ),
-                      ),
-                      onPressed: () {},
-                      style: ButtonStyle(
-                        elevation: MaterialStateProperty.all<double>(2.0),
-                        backgroundColor:
-                        MaterialStateProperty.all<Color>(TBgWhite),
                       ),
                     ),
                   ),

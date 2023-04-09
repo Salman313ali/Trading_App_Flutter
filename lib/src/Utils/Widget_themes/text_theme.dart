@@ -40,8 +40,9 @@ class TTextTheme{
   ),
       headline2:GoogleFonts.poppins(
           color: TWhite,
-          fontWeight: FontWeight.w600,
-          fontSize: 24.0
+          fontWeight: FontWeight.w500,
+          fontSize: 20.0,
+          height: 1.1
       ),
       headline1:GoogleFonts.poppins(
           color: TWhite,
