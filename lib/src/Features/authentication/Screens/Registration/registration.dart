@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:trading_app/src/Constants/Color.dart';
 
+import '../Wigets/Button.dart';
+import '../Wigets/Text_feild.dart';
 import 'cnic.dart';
 
 class RegistrationForm extends StatefulWidget {
@@ -14,6 +16,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
   final _nameController = TextEditingController();
   final _mobileNumberController = TextEditingController();
   final _emailController = TextEditingController();
+  final _passController = TextEditingController();
+  final _confirmPassController = TextEditingController();
   bool _termsAndPrivacyChecked = false;
 
   @override
@@ -21,7 +25,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Registration",style: Theme.of(context).textTheme.headline3!.copyWith(color: TGreen),),
+        title: Text("Registration",style: Theme.of(context).textTheme.headline3!.copyWith(color: TWhite),),
         centerTitle: true,
         elevation: 0.0,
         leading:  IconButton(
@@ -29,7 +33,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
             Navigator.pop(context);
           },
           icon: Icon(Icons.arrow_back_ios_rounded),
-          color: TGreen,
+          color: TWhite,
           iconSize: 25.0,
         ),
       ),
@@ -53,87 +57,78 @@ class _RegistrationFormState extends State<RegistrationForm> {
                   child: Form(
                     key: _formKey,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-
-                    Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text("Name(as it appers on CNIC)*"),
-                        TextFormField(
-                          controller: _nameController,
-                          decoration: InputDecoration(
-                            labelText: 'Enter Your Name',
-                            labelStyle: TextStyle(
-                              color: Colors.grey.withOpacity(0.6), // set the alpha value to 0.6 (60% opacity)
-                            ),
-                          ),
-                          validator: (value) {
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                        CTextFeild(
+                            emailController: _nameController,
+                            heading: "Name(as is Appers on CNIC)*",
+                            hintText: "Enter you name",
+                            press: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your full name';
+                              }
+                              return null;
+                            },
+                          inputType: TextInputType.text,
+                        ),
+                        CTextFeild(emailController: _mobileNumberController,
+                      heading: "Mobile Number*",
+                      hintText: "Mobile number",
+                      press:  (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your mobile number';
+                      }
+                      if (value.length != 11) {
+                        return 'Please enter a valid 11-digit mobile number';
+                      }
+                      return null;
+                    },
+                        inputType: TextInputType.number,
+                      ),
+                        CTextFeild(
+                          emailController: _emailController,
+                          hintText: "Email",heading: "Email(Optional)",
+                          press: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter your full name';
+                              return 'Please enter your email address';
+                            }
+                            if (!value.contains('@')) {
+                              return 'Please enter a valid email address';
                             }
                             return null;
                           },
+                          inputType: TextInputType.emailAddress,
                         ),
-                      ],
-                    ),
-                  ),
+                        CTextFeild(
+                          emailController: _passController,
+                          hintText: "password",heading: "Create Password",
+                          press: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your password';
+                            }
+                            else if (value.length<8) {
+                              return 'Password must be at least 6 characters';
+                            }
+                            return null;
+                          },
+                          inputType: TextInputType.visiblePassword,
+                          ispassword: true,
+                        ),
+                        CTextFeild(
+                          emailController: _confirmPassController,
+                          hintText: "Confirm Password",heading: "re-enter password",
+                          press: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please confirm your password';
+                            }
+                            else if (value != _passController.text) {
+                              return 'password doesn\'t match';
+                            }
+                            return null;
+                          },
+                          inputType: TextInputType.visiblePassword,
+                          ispassword: true,
 
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 12.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text("Mobile Number*"),
-                              TextFormField(
-                                controller: _mobileNumberController,
-                                decoration: InputDecoration(labelText: 'Mobile Number*',
-                                  labelStyle: TextStyle(
-                                    color: Colors.grey.withOpacity(0.6), // set the alpha value to 0.6 (60% opacity)
-                                  ),
-                                ),
-                                keyboardType: TextInputType.phone,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter your mobile number';
-                                  }
-                                  if (value.length != 11) {
-                                    return 'Please enter a valid 11-digit mobile number';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 12.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text("Email(Optinal)"),
-                              TextFormField(
-                                controller: _emailController,
-                                decoration: InputDecoration(labelText: 'Email',
-                                  labelStyle: TextStyle(
-                                    color: Colors.grey.withOpacity(0.6), // set the alpha value to 0.6 (60% opacity)
-                                  ),
-                                ),
-                                keyboardType: TextInputType.emailAddress,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter your email address';
-                                  }
-                                  if (!value.contains('@')) {
-                                    return 'Please enter a valid email address';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ],
-                          ),
                         ),
                         Row(
                           children: [
@@ -162,35 +157,27 @@ class _RegistrationFormState extends State<RegistrationForm> {
                           ],
                         ),
                         const SizedBox(height: 16),
-                        Center(
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width*0.3,
-                            child: ElevatedButton(
-
-                              onPressed: () {
-                                if (_formKey.currentState!.validate() &&
-                                    _termsAndPrivacyChecked) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => CnicForm(),
-                                    ),
-                                  );
-                                } else if (!_termsAndPrivacyChecked) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(content: Text('Please accept the terms and privacy policy')));
-                                }
-                              },
-                              child: Text('NEXT',style: TextStyle(color: TGreen)),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: TBgWhite,// background color
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30), // rounded border
-                              ),
-                            ),
+                        CButton(
+                          name: "Next",
+                            formKey: _formKey,
+                            termsAndPrivacyChecked: _termsAndPrivacyChecked,
+                          width: MediaQuery.of(context).size.width*0.3,
+                          press: () {
+                            if (_formKey.currentState!.validate() &&
+                                _termsAndPrivacyChecked) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CnicForm(),
+                                ),
+                              );
+                            } else if (!_termsAndPrivacyChecked) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Please accept the terms and privacy policy')));
+                            }
+                          },
                         ),
-                          ),
-                        )],
+                      ],
                     ),
                   ),
                 ),
@@ -202,4 +189,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
     );
   }
 }
+
+
+
 
