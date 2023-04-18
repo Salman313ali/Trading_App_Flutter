@@ -21,14 +21,16 @@ class _MSliderState extends State<MSlider> {
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 35.0,vertical: 20.0),
+          padding: EdgeInsets.symmetric(horizontal: 34.0/757* size.height,vertical: 34.0/1600* size.height),
           child: Text(
             widget.cont[currentIndex],
-            style: Theme.of(context).textTheme.headline2,
+            style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.grey[700]),
             textAlign: TextAlign.center,
+            textScaleFactor: size.width/757,
           ),
         ),
         SizedBox(height: 10.0,),
@@ -65,9 +67,9 @@ class _MSliderState extends State<MSlider> {
             child: AnimatedSmoothIndicator(
             count: widget.picsPath.length,
             activeIndex: currentIndex,
-              effect: const WormEffect(
+              effect: WormEffect(
                 activeDotColor: TGreen,
-                dotHeight: 5.0
+                dotHeight: 5.0/1600* size.height
               ),
         ),
         )],

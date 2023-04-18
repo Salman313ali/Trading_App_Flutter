@@ -3,11 +3,13 @@ import 'package:trading_app/src/Features/Home/Home.dart';
 import 'package:trading_app/src/Features/authentication/Screens/Wigets/Button.dart';
 import 'package:trading_app/src/Features/authentication/Screens/Wigets/Text_feild.dart';
 
-import '../../../Constants/Color.dart';
-import 'Registration/OTP.dart';
-import 'Registration/registration.dart';
-class ResetPass extends StatelessWidget {
-   ResetPass({Key? key}) : super(key: key);
+import '../../../../Constants/Color.dart';
+import '../on_boarding_screen.dart';
+import 'OTP.dart';
+
+
+class CreatePass extends StatelessWidget {
+   CreatePass({Key? key}) : super(key: key);
 
   final _ResetFormKey = GlobalKey<FormState>();
   final _newPassController = TextEditingController();

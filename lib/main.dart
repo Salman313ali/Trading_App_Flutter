@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trading_app/src/Features/authentication/Screens/Registration/registration.dart';
 import 'package:trading_app/src/Features/authentication/Screens/on_boarding_screen.dart';
 import 'package:trading_app/src/Utils/Theme.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: TAppTheme.lightTheme,
       darkTheme: TAppTheme.darkTheme,
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.light,
       home: OnboardingScreen(),
     );
   }

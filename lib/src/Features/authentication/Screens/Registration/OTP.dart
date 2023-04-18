@@ -12,28 +12,58 @@ class EnterOTP extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Enter Code",style: Theme.of(context).textTheme.headline3!.copyWith(color: TGreen),),
-        centerTitle: true,
-        elevation: 0.0,
-        leading:  IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back_ios_rounded),
-          color: TGreen,
-          iconSize: 25.0,
-        ),
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
+    final size = MediaQuery.of(context).size;
+    final textScale = size.width/757;
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: TBgWhite,
+        body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 16.0,horizontal: 10.0),
+            padding: EdgeInsets.symmetric(horizontal:44.0/757* size.width , vertical: 34.0/1600* size.height),
             child: Column(
               children: [
-                Text("Enter the OTP received on your mobile number",style: Theme.of(context).textTheme.headline3,textAlign: TextAlign.center,),
-                SizedBox(height: 16.0,),
+                Container(
+                  margin: EdgeInsets.only(bottom:34.0/1600* size.height),
+                  height: 64.0/1600* size.height,
+                  width: size.width,
+                  color: TBgWhite,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Text(
+                        "FORGET PASSWORD",
+                        style: Theme.of(context).textTheme.headline3!.copyWith(color:TGreen),
+                        textScaleFactor: textScale,
+                      ),
+                      Positioned(
+                        left: 0,
+                        child:
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          color: TGreen,
+                          icon: const Icon(Icons.navigate_before),
+                          iconSize: 64.0/1600* size.height,
+
+                          padding: EdgeInsets.only(left: 7.0/ 757* size.width),
+                          style: const ButtonStyle(
+                            padding: MaterialStatePropertyAll(EdgeInsets.all(10.0)),
+                            backgroundColor: MaterialStatePropertyAll(Colors.red),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Text(
+                  "Enter the OTP received on your mobile number",
+                  style: Theme.of(context).textTheme.headline1!.copyWith(color: TGreen),
+                  textAlign: TextAlign.center,
+                  textScaleFactor: textScale,
+
+                ),
+                SizedBox(height:  40/ 1600* size.height,),
                 Form(
                   key: _OTPFormKey,
                     child:
@@ -55,9 +85,10 @@ class EnterOTP extends StatelessWidget {
                         Opacity(
                           opacity: 0.5,
                             child: Text("Resend Code",style: Theme.of(context).textTheme.headline4)),
-                        SizedBox(height: 16.0,),
+                        SizedBox(height: 75.0/1600* size.height,),
                         CButton(formKey: _OTPFormKey,
-                            width: MediaQuery.of(context).size.width*0.3,
+                            height: 75.0/1600* size.height,
+                            width: 310.0/757* size.width,
                             press:() {
                             if (_OTPFormKey.currentState!.validate()) {
                               Navigator.push(
@@ -69,9 +100,7 @@ class EnterOTP extends StatelessWidget {
                             }
                             },
                             name: "Confirm")
-                      ],
-
-                    ),
+                      ],),
                 )
               ],
             ),
@@ -92,7 +121,7 @@ class COTPInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 68.0,
+      height: 64.0,
       width: 64.0,
       child: TextFormField(
 
@@ -103,20 +132,17 @@ class COTPInput extends StatelessWidget {
         },
         decoration: InputDecoration(
 
-          hintText: "0",
-          filled: true,
-          fillColor: Colors.grey[900],
           border: OutlineInputBorder(
 
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(100),
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: TGreen),
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(100),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: TGreen),
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(100),
           ),
 
         ),

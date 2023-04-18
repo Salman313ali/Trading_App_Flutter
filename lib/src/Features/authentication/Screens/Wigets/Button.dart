@@ -12,6 +12,7 @@ class CButton extends StatelessWidget {
     required this.width,
     required this.press,
     required this.name ,
+    required this.height
   }) ;
 
   final GlobalKey<FormState> formKey;
@@ -19,6 +20,7 @@ class CButton extends StatelessWidget {
   final double width;
   final Function()? press;
   final String name;
+  final double height;
   Color color;
   Color bgcolor;
   @override
@@ -26,6 +28,7 @@ class CButton extends StatelessWidget {
     return Center(
       child: SizedBox(
         width: width,
+        height: height,
         child: ElevatedButton(
 
           onPressed: press,

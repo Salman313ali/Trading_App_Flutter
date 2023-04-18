@@ -41,6 +41,7 @@ dependencies:
   smooth_page_indicator: ^1.0.1
   intl: ^0.18.0
   shared_preferences: ^2.1.0
+  pixel_perfect: ^1.1.1
 
 dev_dependencies:
   flutter_test:
