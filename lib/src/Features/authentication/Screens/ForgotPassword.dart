@@ -10,34 +10,62 @@ class ForgotPass extends StatelessWidget {
   final _resetFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("RESET LOGIN PIN",style: Theme.of(context).textTheme.headline3!.copyWith(color: TWhite),),
-        centerTitle: true,
-        elevation: 0.0,
-        leading:  IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back_ios_rounded),
-          color: TWhite,
-          iconSize: 25.0,
-        ),
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
+    final size = MediaQuery.of(context).size;
+    final textScale = size.width/757;
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: TBgWhite,
+        body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0,vertical: 10.0),
+            padding: EdgeInsets.symmetric(horizontal:44.0/757* size.width , vertical: 34.0/1600* size.height),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Reset Login password",style: Theme.of(context).textTheme.headline3!.copyWith(color: TGreen),),
+                Container(
+                  margin: EdgeInsets.only(bottom:34.0/1600* size.height),
+                  height: 64.0/1600* size.height,
+                  width: size.width,
+                  color: TBgWhite,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Text(
+                        "FORGET PASSWORD",
+                        style: Theme.of(context).textTheme.headline3!.copyWith(color:TGreen),
+                        textScaleFactor: textScale,
+                      ),
+                      Positioned(
+                        left: 0,
+                        child:
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          color: TGreen,
+                          icon: const Icon(Icons.navigate_before),
+                          iconSize: 64.0/1600* size.height,
+
+                          padding: EdgeInsets.only(left: 7.0/ 757* size.width),
+                          style: const ButtonStyle(
+                            padding: MaterialStatePropertyAll(EdgeInsets.all(10.0)),
+                            backgroundColor: MaterialStatePropertyAll(Colors.red),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Text(
+                  "Reset Login password",
+                  style: Theme.of(context).textTheme.headline1!.copyWith(color: TGreen),
+                  textScaleFactor: textScale,
+                ),
                 SizedBox(height: 25.0,),
               Form(
                 key: _resetFormKey,
                   child: Column(
                     children: [
-                      CTextFeild(emailController: _mobileController,
+                      CTextFeild(controller: _mobileController,
                           heading: "Mobile Number",
                           hintText: "Enter Mobile Numer",
                           press: (value){
@@ -50,7 +78,10 @@ class ForgotPass extends StatelessWidget {
                             return null;
                           },
                           inputType: TextInputType.number),
-                      CButton(formKey: _resetFormKey, width: MediaQuery.of(context).size.width*0.3,
+                      SizedBox(height: 75.0/1600* size.height,),
+                      CButton(
+                        formKey: _resetFormKey,
+                        width: 310.0/757* size.width,
                           press: () {
                             if (_resetFormKey.currentState!.validate()) {
                               Navigator.push(
@@ -61,7 +92,9 @@ class ForgotPass extends StatelessWidget {
                               );
                             }
                           },
-                          name: "Send Code")
+                          name: "Send Code",
+                        height: 75.0/1600* size.height,
+                      )
                     ],
                   )
               ),

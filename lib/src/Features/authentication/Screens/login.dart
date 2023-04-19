@@ -5,6 +5,7 @@ import 'package:trading_app/src/Features/authentication/Screens/Wigets/Text_feil
 
 import '../../../Constants/Color.dart';
 import 'ForgotPassword.dart';
+import 'Registration/OTP.dart';
 import 'Registration/registration.dart';
 
 class LoginPage extends StatelessWidget {
@@ -15,31 +16,59 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Registration",style: Theme.of(context).textTheme.headline3!.copyWith(color: TWhite),),
-        centerTitle: true,
-        elevation: 0.0,
-        leading:  IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back_ios_rounded),
-          color: TWhite,
-          iconSize: 25.0,
-        ),
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
+    final size = MediaQuery.of(context).size;
+    final textScale = size.width/mockupWidth;
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: TBgWhite,
+        body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 10.0),
+            padding: EdgeInsets.symmetric(horizontal:44.0/757* size.width , vertical: 34.0/1600* size.height),
 
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Container(
+                  margin: EdgeInsets.only(bottom:34.0/mockupHeight* size.height),
+                  height: 64.0/mockupHeight* size.height,
+                  width: size.width,
+                  color: TBgWhite,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Text(
+                        "LOG IN",
+                        style: Theme.of(context).textTheme.headline3!.copyWith(color:TGreen),
+                        textScaleFactor: textScale,
+                      ),
+                      Positioned(
+                        left: 0,
+                        child:
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          color: TGreen,
+                          icon: const Icon(Icons.navigate_before),
+                          iconSize: 64.0/mockupHeight* size.height,
 
-                Text("Login in to your account",style: Theme.of(context).textTheme.headline3!.copyWith(color: TGreen),),
-                SizedBox(height: 25.0,),
+                          padding: EdgeInsets.only(left: 7.0/ mockupWidth* size.width),
+                          style: const ButtonStyle(
+                            padding: MaterialStatePropertyAll(EdgeInsets.all(10.0)),
+                            backgroundColor: MaterialStatePropertyAll(Colors.red),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                Text(
+                  "Login in to your account",
+                  style: Theme.of(context).textTheme.headline1!.copyWith(color: TGreen),
+                  textScaleFactor: textScale,
+                ),
+                SizedBox(height: 70.0/mockupHeight*size.height,),
 
                 SingleChildScrollView(
                   child: Form(
@@ -48,7 +77,7 @@ class LoginPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
 
                       children: [
-                        CTextFeild(emailController: _NumberController,
+                        CTextFeild(controller: _NumberController,
                             heading: "Mobile Number*",
                             hintText: "Enter Mobile Number*",
                             press: (value) {
@@ -63,26 +92,24 @@ class LoginPage extends StatelessWidget {
                             inputType: TextInputType.number
                         ),
 
-
+                        Text(
+                          "PIN",
+                          style: Theme.of(context).textTheme.headline2,
+                          textScaleFactor: textScale,
+                        ),
                         Stack(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 16.0),
-                              child: CTextFeild(
-                                emailController: _passController,
-                                heading: "Password",
-                                hintText: "Enter Your Password",
-                                press: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter your password';
-                                  }
-                                  if (value.length <8) {
-                                    return 'Please enter a valid password';
-                                  }
-                                  return null;
-                                },
-                                inputType: TextInputType.visiblePassword,
-                                ispassword: true ,
+                              padding: const EdgeInsets.only(bottom: 30.0,left: 40.0,right: 40.0),
+                              child: Row(
+
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  COTPInput(),
+                                  COTPInput(),
+                                  COTPInput(),
+                                  COTPInput(),
+                                ],
                               ),
                             ),
 
@@ -98,15 +125,16 @@ class LoginPage extends StatelessWidget {
                                     ),
                                   );
                                 },
-                                child: Text('FORGOT PASSWORD?',style: Theme.of(context).textTheme.headline4!.copyWith(fontSize: 12.0,fontWeight: FontWeight.w600),),
+                                child: Text('FORGOT PIN?',style: Theme.of(context).textTheme.headline4!.copyWith(fontSize: 12.0,fontWeight: FontWeight.w600),),
                               ),
                             ),
                             ],
                         ),
                         SizedBox(height: 16.0,),
                         CButton(
+                          height: 75.0/mockupHeight* size.height,
                           formKey: _SigninFormKey,
-                          width: MediaQuery.of(context).size.width*0.3,
+                          width:310.0/mockupWidth* size.width,
                           press:() {
                             if (_SigninFormKey.currentState!.validate()) {
                               Navigator.push(
