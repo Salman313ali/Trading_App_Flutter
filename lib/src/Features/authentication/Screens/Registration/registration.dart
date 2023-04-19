@@ -32,13 +32,17 @@ class _RegistrationFormState extends State<RegistrationForm> {
   final _confirmPassController = TextEditingController();
   bool _termsAndPrivacyChecked = false;
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final scale = mockupWidth/size.width;
     final textScale = size.width/mockupWidth;
+    String errorText = "";
     return SafeArea(
       child: Scaffold(
+        key: _scaffoldKey,
         backgroundColor: TBgWhite,
         body: SingleChildScrollView(
           child: Padding(
@@ -117,7 +121,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
                             hintText: "Enter Your Name",
                             press: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter your full name';
+                                errorText  = 'Please enter your full name';
+                                return '';
                               }
                               return null;
                             },
@@ -128,28 +133,34 @@ class _RegistrationFormState extends State<RegistrationForm> {
                             hintText: "Enter Your Mobile Number",
                             press: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter your mobile number';
+                                errorText = "Please enter your mobile number";
+                                return '';
+                                // return 'Please enter your mobile number';
                               }
                               if (value.length != 11) {
-                                return 'Please enter a valid 11-digit mobile number';
+                                errorText = "Please enter a valid 11-digit mobile number";
+                                return '';
                               }
                               return null;
                             },
                             inputType: TextInputType.text),
                         CTextFeild(
                             controller: _emailController,
-                            heading: "Email(Optional",
+                            heading: "Email (Optional)",
                             hintText: "Enter email",
                             press: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter your email address';
+                                errorText = 'Please enter your email address';
+                                return'';
                               }
                               if (!value.contains('@')) {
-                                return 'Please enter a valid email address';
+                                errorText = 'Please enter a valid email address';
+                                return'';
                               }
                               return null;
                             },
-                            inputType: TextInputType.text),
+                            inputType: TextInputType.text
+                        ),
                         SizedBox(height: 25.0/mockupHeight* size.height,),
                         Row(
                           children: [
@@ -181,7 +192,13 @@ class _RegistrationFormState extends State<RegistrationForm> {
                         CButton(formKey: _formKey,
                             width: 310.0/mockupWidth* size.width,
                           press: () {
-                            if (_formKey.currentState!.validate() &&
+                            if(!(_formKey.currentState!.validate()) && _termsAndPrivacyChecked){
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text(errorText),
+                                      duration: Duration(seconds: 1),));
+                            }
+                            if ((_formKey.currentState!.validate()) &&
                                 _termsAndPrivacyChecked) {
                               Navigator.push(
                                 context,
@@ -193,6 +210,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                       content: Text('Please accept the terms and privacy policy')));
+                                      // content: Text('Please accept the terms and privacy policy')));
                             }
                           },
                           name: "Next",

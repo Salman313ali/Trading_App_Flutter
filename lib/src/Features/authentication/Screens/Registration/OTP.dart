@@ -120,9 +120,31 @@ class COTPInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: 64.0,
       width: 64.0,
+        decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade400,
+              ),
+              BoxShadow(
+                  color: TBgWhite,
+                  spreadRadius: 5.0,
+                  blurRadius: 10.0,
+                  offset: Offset(10,7)
+              ),
+            ], gradient: LinearGradient(
+          begin: Alignment.bottomCenter,
+          end: Alignment(0, 0),
+          colors: [
+            Colors.white,
+            Colors.white.withOpacity(0.2),
+          ],
+        ),
+
+            borderRadius: BorderRadius.circular(50.0)
+        ),
       child: TextFormField(
 
         onChanged: (value){
@@ -131,20 +153,14 @@ class COTPInput extends StatelessWidget {
           }
         },
         decoration: InputDecoration(
-
-          border: OutlineInputBorder(
-
-            borderRadius: BorderRadius.circular(100),
+          errorStyle: TextStyle(
+              height: 0,
+              fontSize: 0,
+              decoration: null
           ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: TGreen),
-            borderRadius: BorderRadius.circular(100),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: TGreen),
-            borderRadius: BorderRadius.circular(100),
-          ),
-
+          errorMaxLines: 1,
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         ),
         keyboardType: TextInputType.number,
         textAlign: TextAlign.center,

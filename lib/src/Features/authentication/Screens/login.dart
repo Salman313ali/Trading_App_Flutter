@@ -18,6 +18,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final textScale = size.width/mockupWidth;
+    String errorText = "";
     return SafeArea(
       child: Scaffold(
         backgroundColor: TBgWhite,
@@ -82,10 +83,12 @@ class LoginPage extends StatelessWidget {
                             hintText: "Enter Mobile Number*",
                             press: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter your Mobile number';
+                                errorText = 'Please enter your Mobile number';
+                                return '';
                               }
                               if (value.length != 11) {
-                                return 'Please enter a valid 11-digit mobie number';
+                                errorText = 'Please enter a valid 11-digit mobie number';
+                                return '';
                               }
                               return null;
                             },
@@ -146,7 +149,8 @@ class LoginPage extends StatelessWidget {
                             }
                             else {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Please insert valid info')));
+                                  SnackBar(content: Text(errorText),
+                                  duration: Duration(seconds: 1),));
                             }
                           },
                           name: "LOGIN",

@@ -17,7 +17,7 @@ class TTextTheme{
       fontSize: 25.0
   ),
       headline2:GoogleFonts.montserrat(
-          color: Colors.black54,
+          color: Colors.black,
           fontWeight: FontWeight.w500,
 
           fontSize: 28.0,

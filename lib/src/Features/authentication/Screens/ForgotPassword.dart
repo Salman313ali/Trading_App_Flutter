@@ -12,6 +12,7 @@ class ForgotPass extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final textScale = size.width/757;
+    String errorText= "";
     return SafeArea(
       child: Scaffold(
         backgroundColor: TBgWhite,
@@ -70,10 +71,12 @@ class ForgotPass extends StatelessWidget {
                           hintText: "Enter Mobile Numer",
                           press: (value){
                             if (value == null || value.isEmpty) {
-                              return 'Please enter your mobile number';
+                              errorText = 'Please enter your mobile number';
+                              return '';
                             }
                             if (value.length != 11) {
-                              return 'Please enter a valid 11-digit mobile number';
+                              errorText = 'Please enter a valid 11-digit mobile number';
+                              return '';
                             }
                             return null;
                           },
@@ -90,6 +93,12 @@ class ForgotPass extends StatelessWidget {
                                   builder: (context) => EnterOTP(),
                                 ),
                               );
+                            }
+                            else{
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(errorText),
+                                    duration: Duration(seconds: 1),));
                             }
                           },
                           name: "Send Code",

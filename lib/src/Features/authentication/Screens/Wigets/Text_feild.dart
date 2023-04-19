@@ -34,35 +34,50 @@ class CTextFeild extends StatelessWidget {
           textScaleFactor: size.width/757,
         ),
         SizedBox(height: 0.014375 * size.height,),
-          TextFormField(
+        Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade400,
+              ),
+              BoxShadow(
+                color: TBgWhite,
+                spreadRadius: 5.0,
+                blurRadius: 10.0,
+                offset: Offset(10,7)
+              ),
+            ], gradient: LinearGradient(
+            begin: Alignment.bottomCenter,
+            end: Alignment(0, 0),
+            colors: [
+              Colors.white,
+              Colors.white.withOpacity(0.3),
+            ],
+          ),
+
+            borderRadius: BorderRadius.circular(50.0)
+          ),
+          child: TextFormField(
             obscureText: ispassword,
             controller: controller,
             decoration: InputDecoration(
+                errorStyle: TextStyle(
+                    height: 0,
+                  fontSize: 0,
+                  decoration: null
+                ),
+              errorMaxLines: 1,
               hintText: hintText,
               hintStyle: TextStyle(
-                color: Colors.grey.withOpacity(0.6), // set the alpha value to 0.6 (60% opacity)
+                color: Colors.grey.withOpacity(0.6),
               ),
-              border: OutlineInputBorder(
-
-                borderRadius: BorderRadius.circular(50),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: TGreen),
-                borderRadius: BorderRadius.circular(50),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: TGreen),
-                borderRadius: BorderRadius.circular(50),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: TGreen),
-                borderRadius: BorderRadius.circular(50),
-              ),
-
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
             ),
             keyboardType: inputType,
             validator: press,
           ),
+        ),
         SizedBox(height: 0.02125* size.height,)
       ],
     );

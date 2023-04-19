@@ -18,6 +18,7 @@ class CreatePass extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final textScale = size.width/mockupWidth;
+    String errorText = "";
     return SafeArea(
       child: Scaffold(
         backgroundColor: TBgWhite,
