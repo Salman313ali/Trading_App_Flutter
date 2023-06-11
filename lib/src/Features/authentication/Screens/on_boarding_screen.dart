@@ -39,7 +39,7 @@ class OnboardingScreen extends StatelessWidget {
                 cont: [
                   "Mobile banking like never before",
                   "Invite your friends & earn money",
-                  "Get your Debit card or Go virtual with our MasterCard"
+                  "Get a DebitCard or Go Virtual with MasterCard"
                 ],
               ),
 

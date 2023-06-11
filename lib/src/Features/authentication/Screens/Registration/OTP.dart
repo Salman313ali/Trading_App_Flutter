@@ -120,9 +120,11 @@ class COTPInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
-      height: 64.0,
-      width: 64.0,
+        height: 107/1600* size.height,
+      width: 107/757* size.width,
+
         decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -145,29 +147,30 @@ class COTPInput extends StatelessWidget {
 
             borderRadius: BorderRadius.circular(50.0)
         ),
-      child: TextFormField(
+      child: Center(
+        child: TextFormField(
 
-        onChanged: (value){
-          if(value.length == 1){
-            FocusScope.of(context).nextFocus();
-          }
-        },
-        decoration: InputDecoration(
-          errorStyle: TextStyle(
-              height: 0,
-              fontSize: 0,
-              decoration: null
+          onChanged: (value){
+            if(value.length == 1){
+              FocusScope.of(context).nextFocus();
+            }
+          },
+          decoration: InputDecoration(
+            errorStyle: TextStyle(
+                height: 0,
+                fontSize: 0,
+                decoration: null
+            ),
+            errorMaxLines: 1,
+            border: InputBorder.none,
           ),
-          errorMaxLines: 1,
-          border: InputBorder.none,
-          contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          keyboardType: TextInputType.number,
+          textAlign: TextAlign.center,
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(1),
+            FilteringTextInputFormatter.digitsOnly
+          ],
         ),
-        keyboardType: TextInputType.number,
-        textAlign: TextAlign.center,
-        inputFormatters: [
-          LengthLimitingTextInputFormatter(1),
-          FilteringTextInputFormatter.digitsOnly
-        ],
       )
     );
   }

@@ -26,11 +26,14 @@ class _MSliderState extends State<MSlider> {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 34.0/757* size.height,vertical: 34.0/1600* size.height),
-          child: Text(
-            widget.cont[currentIndex],
-            style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.grey[700]),
-            textAlign: TextAlign.center,
-            textScaleFactor: size.width/757,
+          child: SizedBox(
+            height: 130.0/1600* size.height,
+            child: Text(
+              widget.cont[currentIndex],
+              style: Theme.of(context).textTheme.headline1!.copyWith(color: Colors.grey[700]),
+              textAlign: TextAlign.center,
+              textScaleFactor: size.width/757,
+            ),
           ),
         ),
         SizedBox(height: 10.0,),

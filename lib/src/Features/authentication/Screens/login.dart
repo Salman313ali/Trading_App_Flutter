@@ -23,9 +23,9 @@ class LoginPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: TBgWhite,
         body: SingleChildScrollView(
-          child: Padding(
+          child: Container(
+            height: size.height,
             padding: EdgeInsets.symmetric(horizontal:44.0/757* size.width , vertical: 34.0/1600* size.height),
-
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -63,118 +63,119 @@ class LoginPage extends StatelessWidget {
                     ],
                   ),
                 ),
-
+                Spacer(flex: 3,),
                 Text(
                   "Login in to your account",
                   style: Theme.of(context).textTheme.headline1!.copyWith(color: TGreen),
                   textScaleFactor: textScale,
                 ),
                 SizedBox(height: 70.0/mockupHeight*size.height,),
-
-                SingleChildScrollView(
-                  child: Form(
-                    key: _SigninFormKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-
-                      children: [
-                        CTextFeild(controller: _NumberController,
-                            heading: "Mobile Number*",
-                            hintText: "Enter Mobile Number*",
-                            press: (value) {
-                              if (value == null || value.isEmpty) {
-                                errorText = 'Please enter your Mobile number';
-                                return '';
-                              }
-                              if (value.length != 11) {
-                                errorText = 'Please enter a valid 11-digit mobie number';
-                                return '';
-                              }
-                              return null;
-                            },
-                            inputType: TextInputType.number
-                        ),
-
-                        Text(
-                          "PIN",
-                          style: Theme.of(context).textTheme.headline2,
-                          textScaleFactor: textScale,
-                        ),
-                        Stack(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 30.0,left: 40.0,right: 40.0),
-                              child: Row(
-
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  COTPInput(),
-                                  COTPInput(),
-                                  COTPInput(),
-                                  COTPInput(),
-                                ],
-                              ),
-                            ),
-
-                            Positioned(
-                              bottom:-10,
-                              right: 0,
-                              child: TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>ForgotPass(),
-                                    ),
-                                  );
-                                },
-                                child: Text('FORGOT PIN?',style: Theme.of(context).textTheme.headline4!.copyWith(fontSize: 12.0,fontWeight: FontWeight.w600),),
-                              ),
-                            ),
-                            ],
-                        ),
-                        SizedBox(height: 16.0,),
-                        CButton(
-                          height: 75.0/mockupHeight* size.height,
-                          formKey: _SigninFormKey,
-                          width:310.0/mockupWidth* size.width,
-                          press:() {
-                            if (_SigninFormKey.currentState!.validate()) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Home(),
-                                ),
-                              );
+                Form(
+                  key: _SigninFormKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CTextFeild(controller: _NumberController,
+                          heading: "Mobile Number*",
+                          hintText: "Enter Mobile Number*",
+                          press: (value) {
+                            if (value == null || value.isEmpty) {
+                              errorText = 'Please enter your Mobile number';
+                              return '';
                             }
-                            else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text(errorText),
-                                  duration: Duration(seconds: 1),));
+                            if (value.length != 11) {
+                              errorText = 'Please enter a valid 11-digit mobie number';
+                              return '';
                             }
+                            return null;
                           },
-                          name: "LOGIN",
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Don't have account?"),
-                            TextButton(onPressed:  () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>RegistrationForm(),
-                                ),
-                              );
-                            },
-                                child: Text("SIGN UP"))
-                          ],
-                        )
+                          inputType: TextInputType.number
+                      ),
+                      Text(
+                        "PIN",
+                        style: Theme.of(context).textTheme.headline2,
+                        textScaleFactor: textScale,
+                      ),
+                      Stack(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 30.0,left: 80/757* size.width,right: 80/757* size.width),
+                            child: Row(
 
-                      ],
-                    ),
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                COTPInput(),
+                                SizedBox(width: 25/757* size.width,),
+                                COTPInput(),
+                                SizedBox(width: 25/757* size.width,),
+                                COTPInput(),
+                                SizedBox(width: 25/757* size.width,),
+                                COTPInput(),
+                              ],
+                            ),
+                          ),
+
+                          Positioned(
+                            bottom:-10,
+                            right: 0,
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>ForgotPass(),
+                                  ),
+                                );
+                              },
+                              child: Text('FORGOT PIN?',style: Theme.of(context).textTheme.headline4!.copyWith(fontSize: 12.0,fontWeight: FontWeight.w600),),
+                            ),
+                          ),
+                          ],
+                      ),
+                      SizedBox(height: 16.0,),
+                      CButton(
+                        height: 75.0/mockupHeight* size.height,
+                        formKey: _SigninFormKey,
+                        width:310.0/mockupWidth* size.width,
+                        press:() {
+                          if (_SigninFormKey.currentState!.validate()) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Home(),
+                              ),
+                            );
+                          }
+                          else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text(errorText),
+                                duration: Duration(seconds: 1),));
+                          }
+                        },
+                        name: "LOGIN",
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Don't have account?"),
+                          TextButton(onPressed:  () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>RegistrationForm(),
+                              ),
+                            );
+                          },
+                              child: Text("SIGN UP"))
+                        ],
+                      )
+
+                    ],
                   ),
                 ),
+                Spacer(
+                  flex: 3,
+                )
               ],
             ),
           ),

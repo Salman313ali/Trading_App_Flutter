@@ -101,15 +101,17 @@ class ResetPass extends StatelessWidget {
                           textScaleFactor: textScale,
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 50.0/mockupWidth* size.width,vertical: 30.0/mockupHeight* size.height),
+                          padding: EdgeInsets.only(bottom: 30.0,left: 80/757* size.width,right: 80/757* size.width),
                           child: Row(
 
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-
                               COTPInput(),
+                              SizedBox(width: 25/757* size.width,),
                               COTPInput(),
+                              SizedBox(width: 25/757* size.width,),
                               COTPInput(),
+                              SizedBox(width: 25/757* size.width,),
                               COTPInput(),
                             ],
                           ),
